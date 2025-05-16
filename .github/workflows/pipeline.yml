@@ -7,7 +7,7 @@ on:
   
   workflow_dispatch:
     inputs:
-      VALIDACAO:
+      INPUT_VALIDACAO:
         description: 'Validacao'
         required: true
         type: choice
@@ -20,7 +20,7 @@ jobs:
   k6:
     runs-on: ubuntu-latest
     env:
-      VALIDACAO: ${{ github.event.inputs.VALIDACAO || "true"}} 
+      VALIDACAO: ${{ github.event.inputs.INPUT_VALIDACAO || 'true'}} 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
