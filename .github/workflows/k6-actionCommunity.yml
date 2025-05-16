@@ -34,6 +34,6 @@ jobs:
         with:
           path: |
             index.js
-        flags: |
-          --env TARGET_ENVIRONMENT=${{ github.event.inputs.environment }}
-          --env TEST_DURATION=${{ github.event.inputs.test_duration }}
+          flags: |
+            --env TARGET_ENVIRONMENT=${{ github.event.inputs.environment }}
+            --env TEST_DURATION=${{ github.event.inputs.test_duration }}
