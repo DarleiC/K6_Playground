@@ -5,14 +5,14 @@ on:
 
   workflow_dispatch:
     inputs:
-      INPUT_VALIDACAO:
-        description: 'Validacao'
+      INPUT_MAX_DURATION:
+        description: 'MAX DUARION'
         required: true
         type: choice
-        default: 'true'
+        default: '1m'
         options:
-          - "true"
-          - "false"
+          - "30s"
+          - "2m"
 
 jobs:
   protocol:
@@ -22,7 +22,8 @@ jobs:
       - uses: grafana/setup-k6-action@v1
       - uses: grafana/run-k6-action@v1
         env:
-          VALIDACAO: ${{ github.event.inputs.INPUT_VALIDACAO || 'true'}}
+          BASE_URL: 'https://quickpizza.grafana.com'
+          MAX_DURATION: ${{ github.event.inputs.INPUT_MAX_DURATION || '30s'}}
         with:
           path: |
-            index.js
+            test.js
