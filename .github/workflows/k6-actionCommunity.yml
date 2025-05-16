@@ -1,0 +1,36 @@
+name: "[COMMUNITY] Running K6 Load Test - grafana/run-k6-action@v1"
+run-name: "[COMMUNITY]🏃‍♂️‍➡️ Running K6 - grafana/run-k6-action@v1"
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        type: choice
+        default: 'integration'
+        options:
+          - "integration"
+          - "production"
+      test_duration:
+        description: 'Test Duration'
+        required: true
+        type: choice
+        default: '2m'
+        options:
+          - "2m"
+          - "5m"
+          - "10m"
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: grafana/setup-k6-action@v1
+      - uses: grafana/run-k6-action@v1
+        env:
+          TEST_DURATION: ${{ github.event.inputs.test_duration }}
+          TARGET_ENVIRONMENT: ${{ github.event.inputs.environment }}
+        with:
+          path: |
+            index.js

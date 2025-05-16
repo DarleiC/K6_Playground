@@ -1,31 +1,29 @@
-import { sleep } from "k6"
 import http from "k6/http"
-const SCENARIO = __ENV.VALIDACAO === "true" ? "vus1" : "vus10"
-// k6 run -e VALIDACAO=true index.js
+import { sleep } from "k6"
 
-const scenarios = {
-	vus1: {
-		executor: "per-vu-iterations",
-		vus: 1,
-		iterations: 1,
-		maxDuration: "30m"
+const environment = __ENV.TARGET_ENVIRONMENT
+
+const testParameters = {
+	integration: {
+		url: "https://quickpizza.grafana.com",
+		threshold_http_failed_rate: ["rate<0.01"]
 	},
-	vus10: {
-		executor: "per-vu-iterations",
-		vus: 1,
-		iterations: 1,
-		maxDuration: "30m"
+	prod: {
+		url: "https://quickpizza.grafana.com",
+		threshold_http_failed_rate: ["rate<0.001"]
 	}
 }
 
 export const options = {
-	scenarios: {
-		[SCENARIO]: scenarios[SCENARIO]
+	duration: __ENV.TEST_DURATION,
+	vus: 50,
+	thresholds: {
+		http_req_failed: testParameters[environment].threshold_http_failed_rate
 	}
 }
 
 export default function () {
-	const res = http.get("https://quickpizza.grafana.com")
+	const res = http.get(testParameters[environment].url)
 	console.info(res.status_text)
 
 	sleep(1)
