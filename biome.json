@@ -1,0 +1,90 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": false,
+		"defaultBranch": "master"
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"ignore": [
+			".vscode/*",
+			"Scripts-TESTE_ISOLADO/*",
+			"Legado-JMeter/*",
+			"docs/*",
+			"utils.ts",
+			"userVariables.ts",
+			"user-variables.ts",
+			"padronizaMassaCSV*.js"
+		]
+	},
+	"organizeImports": {
+		"enabled": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentWidth": 1
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"useArrowFunction": {
+					"level": "off"
+				},
+				"noForEach": {
+					"level": "warn"
+				}
+			},
+			"suspicious": {
+				"noConsole": {
+					"level": "warn",
+					"options": {
+						"allow": [
+							"info"
+						]
+					}
+				},
+				"noDoubleEquals": {
+					"level": "off"
+				},
+				"noImplicitAnyLet": "off"
+			},
+			"style": {
+				"useConst": "off",
+				"noVar": {
+					"level": "warn"
+				},
+				"noUnusedTemplateLiteral": {
+					"level": "warn"
+				}
+			},
+			"correctness": {
+				"noUnusedFunctionParameters": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"quoteStyle": "double",
+			"semicolons": "asNeeded",
+			"bracketSameLine": true,
+			"attributePosition": "auto",
+			"indentStyle": "tab",
+			"indentWidth": 1,
+			"lineWidth": 200,
+			"lineEnding": "crlf",
+			"trailingCommas": "none"
+		}
+	},
+	"json": {
+		"formatter": {
+			"enabled": false,
+			"lineWidth": 300,
+			"trailingCommas": "none"
+		}
+	}
+}
