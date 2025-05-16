@@ -1,0 +1,35 @@
+name: Running K6 Load Test
+run-name: 🏃‍♂️‍➡️ Running K6 Load Test
+
+on:
+  pull_request:
+    branches:
+      - main
+  
+  workflow_dispatch:
+    inputs:
+      INPUT_VALIDACAO:
+        description: 'Validacao'
+        required: true
+        type: choice
+        default: 'true'
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  k6:
+    runs-on: ubuntu-latest
+    env:
+      VALIDACAO: ${{ github.event.inputs.INPUT_VALIDACAO || 'true'}} 
+   
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup K6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run K6 load test
+        run: |
+          k6 run -e VALIDACAO=${{ env.VALIDACAO }} index.js
