@@ -35,4 +35,4 @@ jobs:
           debug: true
           path: |
             index.js
-          inspect-flags: -e TARGET_ENVIRONMENT=${{ github.event.inputs.environment }} -e TEST_DURATION=${{ github.event.inputs.test_duration }}
+          flags: -e TARGET_ENVIRONMENT=${{ github.event.inputs.environment }} -e TEST_DURATION=${{ github.event.inputs.test_duration }}
